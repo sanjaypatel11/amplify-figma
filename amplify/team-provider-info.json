@@ -10,6 +10,11 @@
       "StackName": "amplify-amplifyfigma-dev-e9a34",
       "StackId": "arn:aws:cloudformation:us-east-1:322859956977:stack/amplify-amplifyfigma-dev-e9a34/8ec133a0-3191-11ef-a5a4-0e8a174b2131",
       "AmplifyAppId": "d14pkyvfmypkl4"
+    },
+    "categories": {
+      "api": {
+        "amplifyfigma": {}
+      }
     }
   }
 }

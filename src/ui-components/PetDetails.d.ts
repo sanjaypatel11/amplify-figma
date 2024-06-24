@@ -6,7 +6,8 @@
 
 import * as React from "react";
 import { Pet } from "../models";
-import { ButtonProps, FlexProps, ImageProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+import { BadgeProps, DividerProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { MyIconProps } from "./MyIcon";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -18,22 +19,25 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type PetProfileOverridesProps = {
-    PetProfile?: PrimitiveOverrideProps<FlexProps>;
-    Button29766907?: PrimitiveOverrideProps<ButtonProps>;
+export declare type PetDetailsOverridesProps = {
+    PetDetails?: PrimitiveOverrideProps<FlexProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
-    Name?: PrimitiveOverrideProps<FlexProps>;
-    "Melinda Marcus"?: PrimitiveOverrideProps<TextProps>;
-    Breed?: PrimitiveOverrideProps<TextProps>;
+    "Card Area"?: PrimitiveOverrideProps<FlexProps>;
+    Title?: PrimitiveOverrideProps<FlexProps>;
+    Frame?: PrimitiveOverrideProps<FlexProps>;
+    Close?: MyIconProps;
+    "Kitty Cat"?: PrimitiveOverrideProps<TextProps>;
+    Divider?: PrimitiveOverrideProps<DividerProps>;
+    Features?: PrimitiveOverrideProps<FlexProps>;
     About?: PrimitiveOverrideProps<TextProps>;
     Age?: PrimitiveOverrideProps<TextProps>;
-    "Frame 437"?: PrimitiveOverrideProps<ViewProps>;
-    Button38563868?: PrimitiveOverrideProps<ButtonProps>;
-    Button38564537?: PrimitiveOverrideProps<ButtonProps>;
+    Badge?: PrimitiveOverrideProps<BadgeProps>;
+    "Bottom Row"?: PrimitiveOverrideProps<FlexProps>;
+    Color?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
-export declare type PetProfileProps = React.PropsWithChildren<Partial<FlexProps> & {
+export declare type PetDetailsProps = React.PropsWithChildren<Partial<FlexProps> & {
     pet?: Pet;
 } & {
-    overrides?: PetProfileOverridesProps | undefined | null;
+    overrides?: PetDetailsOverridesProps | undefined | null;
 }>;
-export default function PetProfile(props: PetProfileProps): React.ReactElement;
+export default function PetDetails(props: PetDetailsProps): React.ReactElement;

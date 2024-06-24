@@ -6,25 +6,44 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "./utils";
-import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
+import { Pet } from "../models";
+import { getOverrideProps, useDataStoreDeleteAction } from "./utils";
+import { schema } from "../models/schema";
+import { Button, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 export default function PetProfile(props) {
   const { pet, overrides, ...rest } = props;
+  const buttonTwoNineSevenSixSixNineZeroSevenOnClick = useDataStoreDeleteAction(
+    { id: pet?.id, model: Pet, schema: schema }
+  );
   return (
     <Flex
       gap="24px"
       direction="column"
-      width="320px"
-      height="unset"
+      width="400px"
+      height="730px"
       justifyContent="flex-start"
       alignItems="center"
       position="relative"
-      padding="24px 24px 24px 24px"
-      backgroundColor="rgba(255,255,255,1)"
+      borderRadius="25px"
+      padding="24px 24px 110px 24px"
+      backgroundColor="rgba(196,228,252,1)"
       {...getOverrideProps(overrides, "PetProfile")}
       {...rest}
     >
+      <Button
+        width="unset"
+        height="unset"
+        shrink="0"
+        alignSelf="stretch"
+        size="large"
+        isDisabled={false}
+        variation="link"
+        children="Delete"
+        onClick={() => {
+          buttonTwoNineSevenSixSixNineZeroSevenOnClick();
+        }}
+        {...getOverrideProps(overrides, "Button29766907")}
+      ></Button>
       <Image
         width="160px"
         height="160px"
@@ -37,6 +56,7 @@ export default function PetProfile(props) {
         borderRadius="160px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
+        src={pet?.image}
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
@@ -69,7 +89,7 @@ export default function PetProfile(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={pet?.Name}
+          children={`${"Name: "}${pet?.Name}`}
           {...getOverrideProps(overrides, "Melinda Marcus")}
         ></Text>
         <Text
@@ -91,36 +111,9 @@ export default function PetProfile(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={pet?.about}
-          {...getOverrideProps(overrides, "Design Engineer at Cloth Studios")}
+          children={`${"Breed: "}${pet?.breed}`}
+          {...getOverrideProps(overrides, "Breed")}
         ></Text>
-      </Flex>
-      <Flex
-        gap="16px"
-        direction="row"
-        width="unset"
-        height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        shrink="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Followers")}
-      >
-        <MyIcon
-          width="24px"
-          height="24px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          overflow="hidden"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          type="group"
-          {...getOverrideProps(overrides, "MyIcon")}
-        ></MyIcon>
         <Text
           fontFamily="Inter"
           fontSize="16px"
@@ -140,21 +133,72 @@ export default function PetProfile(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="99 Followers"
-          {...getOverrideProps(overrides, "99 Followers")}
+          children={`${"About: "}${pet?.about}`}
+          {...getOverrideProps(overrides, "About")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(48,64,80,1)"
+          lineHeight="24px"
+          textAlign="center"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          letterSpacing="0.01px"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={`${"Age: "}${pet?.age}`}
+          {...getOverrideProps(overrides, "Age")}
         ></Text>
       </Flex>
-      <Button
-        width="unset"
-        height="unset"
+      <View
+        width="272px"
+        height="46px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
         shrink="0"
-        alignSelf="stretch"
-        size="large"
-        isDisabled={false}
-        variation="primary"
-        children="View Profile"
-        {...getOverrideProps(overrides, "Button")}
-      ></Button>
+        position="relative"
+        borderRadius="15px"
+        padding="0px 0px 0px 0px"
+        {...getOverrideProps(overrides, "Frame 437")}
+      >
+        <Button
+          width="272px"
+          height="unset"
+          position="absolute"
+          borderRadius="15px"
+          top="78px"
+          left="0px"
+          size="large"
+          isDisabled={false}
+          variation="primary"
+          children="Update"
+          {...getOverrideProps(overrides, "Button38563868")}
+        ></Button>
+        <Button
+          width="272px"
+          height="unset"
+          position="absolute"
+          borderRadius="15px"
+          top="0px"
+          left="0px"
+          size="large"
+          isDisabled={false}
+          variation="primary"
+          children="Profile"
+          {...getOverrideProps(overrides, "Button38564537")}
+        ></Button>
+      </View>
     </Flex>
   );
 }

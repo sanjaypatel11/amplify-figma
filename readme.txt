@@ -51,6 +51,37 @@ Click to include Search and Pagination for Pets.
 amplify pull --appId d14pkyvfmypkl4 --envName dev
 Note: Components are retrieved under src/ui-Components
 
+amplify update api
+To set conflict merge strategy to 'Auto Merge'
+
+amplify push
+
+
+Iteratively:
+Configure Amplify UI components in Figma.
+Sync Figma Components back into Amplify Studio.
+Configure Components in Amplify Studio by setting component and child properties.
+Do 'amplify pull' to retrieve configured components to cli.
+Use components in App.js
+Set various component properties in App.js
+Run 'npm start' to test
+
+
+Add Authentication either via Amplify Studio - Authentication or via cli using 'amplify add auth'
+Will deploy Amazon Cognito via CloudFormation 
+
+amplify pull - to retrieve auth configurations
+amplify status - to validate auth resources
+
+
+Push code to remote Git repo.
+
+Connect remote Git repo to Amplify app by setting Hosting environment for the app in Amplify Studio.
+Save configurations and deploy the app on Amplify platform.
+Open deployed app's web link to test.
+
+
+
 
 
 

@@ -8,49 +8,50 @@ import {  AddPet } from './ui-components';
 import {  PetDetails } from './ui-components';
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
-function App() {
+function App({ user, signOut }) {
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [pet, setPet] = useState();
 
   const [updatePet, setUpdatePet] = useState();
+  // const [updatePet, setUpdatePet] = useState(false);
 
-  const [name, setName] = useState("");
+  const [Name, setName] = useState("");
   const [age, setAge] = useState("");
   const [breed, setBreed] = useState("");
   const [about, setAbout] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState("");
 
-  const formOverride = {
-    TextField29766922: {
-      placeholder: name,
+  const addPetFormOverride = {
+    TextField29766922: { // AddPet Name TextField
+      placeholder: Name,
     },
-    TextField29766923: {
+    TextField29766923: { // AddPet Age TextField
       placeholder: age,
     },
-    TextField29766924: {
+    TextField29766924: { // AddPet Breed TextField
       placeholder: breed,
     },
-    TextField38594674: {
+    TextField38594674: { // AddPet About TextField
       placeholder: about,
     },
-    TextField38594681: {
+    TextField38594681: { // AddPet Color TextField
       placeholder: color,
     },
-    TextField38594688: {
+    TextField38594688: { // AddPet Image TextField
       placeholder: image,
     },
     image: {
       src:
         updatePet == null
-          ? "https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          ? "https://img.icons8.com/color/50/000000/dog"
           : updatePet.image,
     },
-    Button38594696: {
+    Button38594696: { // AddPet Update button
       isDisabled: !updatePet ? true : false,
     },
-    Button29766926: {
+    Button29766926: { // AddPet Save button
       isDisabled: updatePet ? true : false,
     },
 
@@ -65,8 +66,12 @@ function App() {
   };
 
   const navbarOverrides = {
+    Button: {
+      onClick: signOut,
+    },
     image: {
-      src: "https://img.icons8.com/color/50/000000/cat",
+      src: user?.attributes?.profile,
+      //src: "https://img.icons8.com/color/50/000000/cat",
     },
     "Add Pet": {
       style: {
@@ -74,7 +79,25 @@ function App() {
       },
       onClick: () => {
         // saveFile();
+        console.log("Add Pet button clicked. showForm state is: " + showForm);
+        console.log(pet);
+        console.log(updatePet);
+        setName("");
+        setColor("");
+        setAge("");
+        setBreed("");
+        setAbout("");
+        setImage("");
+        setUpdatePet(null);
         setShowForm(!showForm);
+      },
+    },
+    AddPet: {
+      Button38594696: {
+        isDisabled: !updatePet ? true : false,
+      },
+      Button29766926: {
+        isDisabled: updatePet ? true : false,
       },
     },
   };
@@ -85,7 +108,7 @@ function App() {
         <header className="App-header">
 
         {showDetails && (
-          <PetDetails
+          <PetDetails // PetDetails component
             pet={pet}
             style={{
               textAlign: "left",
@@ -105,8 +128,9 @@ function App() {
         )}
 
         {showForm && (
-          <AddPet
-            overrides={formOverride}
+          <AddPet // AddPet component
+            pet={updatePet}
+            overrides={addPetFormOverride}
             style={{
               textAlign: "left",
               margin: "1rem",
@@ -114,22 +138,24 @@ function App() {
           />
         )}
 
-        <Pets
+        <Pets // PetProfile component
           overrideItems={({ item, index }) => ({
             overrides: {
               // Breed: { color: "blue" },
 
-              Button38564537: {
+              Button38564537: { // PetProfile Profile button
                 onClick: () => {
                   setShowDetails(!showDetails);
                   setPet(item);
                 },
               },
-              Button38563868: {
+              Button38563868: { // PetProfile Update button.
                 onClick: () => {
                   if (!showForm) setShowForm(true);
+                  console.log("Update button clicked", item);
                   setUpdatePet(item);
-                  setName(item.name);
+                  // setUpdatePet(true);
+                  setName(item.Name);
                   setColor(item.color);
                   setAge(item.age);
                   setBreed(item.breed);
@@ -142,9 +168,9 @@ function App() {
         />
 
       </header>
-      <Footer width={"100%"} />
+      <Footer width={"100%"} /> 
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App);

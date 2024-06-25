@@ -6,7 +6,7 @@
 
 import * as React from "react";
 import { LogoWithTextProps } from "./LogoWithText";
-import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -24,6 +24,8 @@ export declare type NavBarOverridesProps = {
     "Frame 32129767076"?: PrimitiveOverrideProps<FlexProps>;
     "Add Pet"?: PrimitiveOverrideProps<TextProps>;
     "Frame 32129767081"?: PrimitiveOverrideProps<FlexProps>;
+    Name?: PrimitiveOverrideProps<TextProps>;
+    Button?: PrimitiveOverrideProps<ButtonProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
 } & EscapeHatchProps;
 export declare type NavBarProps = React.PropsWithChildren<Partial<FlexProps> & {

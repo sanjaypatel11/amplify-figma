@@ -6,11 +6,12 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "./utils";
+import { getOverrideProps, useAuth } from "./utils";
 import LogoWithText from "./LogoWithText";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function NavBar(props) {
   const { overrides, ...rest } = props;
+  const authAttributes = useAuth().user?.attributes ?? {};
   return (
     <Flex
       gap="40px"
@@ -22,7 +23,7 @@ export default function NavBar(props) {
       position="relative"
       boxShadow="0px 2px 6px rgba(0.05098039284348488, 0.10196078568696976, 0.14901961386203766, 0.15000000596046448)"
       padding="24px 32px 24px 32px"
-      backgroundColor="rgba(188,227,255,1)"
+      backgroundColor="rgba(250,252,140,1)"
       {...getOverrideProps(overrides, "NavBar")}
       {...rest}
     >
@@ -55,9 +56,9 @@ export default function NavBar(props) {
       >
         <Text
           fontFamily="Inter"
-          fontSize="20px"
+          fontSize="24px"
           fontWeight="700"
-          color="rgba(13,26,38,1)"
+          color="rgba(64,170,191,1)"
           lineHeight="24px"
           textAlign="left"
           display="block"
@@ -76,7 +77,7 @@ export default function NavBar(props) {
         ></Text>
       </Flex>
       <Flex
-        gap="32px"
+        gap="55px"
         direction="row"
         width="unset"
         height="unset"
@@ -89,6 +90,37 @@ export default function NavBar(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 32129767081")}
       >
+        <Text
+          fontFamily="Inter"
+          fontSize="24px"
+          fontWeight="700"
+          color="rgba(191,64,191,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={authAttributes["name"]}
+          {...getOverrideProps(overrides, "Name")}
+        ></Text>
+        <Button
+          width="unset"
+          height="unset"
+          shrink="0"
+          size="large"
+          isDisabled={false}
+          variation="primary"
+          children="Signout"
+          {...getOverrideProps(overrides, "Button")}
+        ></Button>
         <Image
           width="45px"
           height="45px"

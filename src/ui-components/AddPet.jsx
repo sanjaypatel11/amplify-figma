@@ -6,17 +6,18 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Pet } from "../models";
 import {
   getOverrideProps,
   useDataStoreCreateAction,
+  useDataStoreUpdateAction,
   useStateMutationAction,
 } from "./utils";
-import { Pet } from "../models";
 import { schema } from "../models/schema";
 import { Button, Flex, Image, Text, TextField } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function AddPet(props) {
-  const { overrides, ...rest } = props;
+  const { pet, overrides, ...rest } = props;
   const [
     textFieldTwoNineSevenSixSixNineTwoTwoValue,
     setTextFieldTwoNineSevenSixSixNineTwoTwoValue,
@@ -53,6 +54,20 @@ export default function AddPet(props) {
     model: Pet,
     schema: schema,
   });
+  const buttonThreeEightFiveNineFourSixNineSixOnClick =
+    useDataStoreUpdateAction({
+      fields: {
+        Name: textFieldTwoNineSevenSixSixNineTwoTwoValue,
+        age: textFieldTwoNineSevenSixSixNineTwoThreeValue,
+        breed: textFieldTwoNineSevenSixSixNineTwoFourValue,
+        about: textFieldThreeEightFiveNineFourSixSevenFourValue,
+        image: textFieldThreeEightFiveNineFourSixEightEightValue,
+        color: textFieldThreeEightFiveNineFourSixEightOneValue,
+      },
+      id: pet?.id,
+      model: Pet,
+      schema: schema,
+    });
   return (
     <Flex
       gap="16px"
@@ -315,9 +330,12 @@ export default function AddPet(props) {
             height="unset"
             shrink="0"
             size="default"
-            isDisabled={true}
+            isDisabled={false}
             variation="primary"
             children="Update"
+            onClick={() => {
+              buttonThreeEightFiveNineFourSixNineSixOnClick();
+            }}
             {...getOverrideProps(overrides, "Button38594696")}
           ></Button>
         </Flex>

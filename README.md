@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Amplify React Figma app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Install Pre-requisites.
+- Node.sj v14.x or later
+- npm v6.14.4 or later
+- git v2.14.1 or later
+- AWS Account
 
-## Available Scripts
 
-In the project directory, you can run:
+### Create a remote GIT repo and clone it locally.
+```sh
+git clone <repo>
+```
 
-### `npm start`
+### Create a local React app in the cloned repo.
+```sh
+npx create-react-app amplify-figma
+cd amplify-figma
+```
 
+### Test new React app.
+```sh
+npm start
+```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The page will reload when you make changes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Install Amplify cli.
+```sh
+npm install -g @aws-amplify/cli
+```
 
-### `npm test`
+### Intialize Amplify in the new project.
+```sh
+amplify init
+```
+Select appropriate project specific configurations.<br/>
+Deploys CloudFormation template to create:
+- DeploymentBucket (S3)
+- AuthRole (IAM)
+- UnauthRole (IAM)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Install Amplify library and UI components.
+```sh
+npm install aws-amplify @aws-amplify/ui-react
+```
 
-### `npm run build`
+### Login to AWS Console and access Amplify Studio IDE.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Create Pet Data Model and load it with some sample data.
+Creates AppSync GraphQL API backed by DynamodB table.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Pull Amplify Studio updates to the local app.
+```sh
+amplify pull --appId <appId> --envName <environment>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Use Amplify component template in Figma.
+- Navigate to Amplify Studio UI Library
+- Connect your Figma file to Amplify Studio
+- Create/Update UI components in Figma.
+- Navigate back to Amplify Studio UI Library
+- Sync UI components with Figma
 
-### `npm run eject`
+### Configure your UI component properties in Amplify Studio.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Pull Amplify Studio updates to the local app.
+```sh
+amplify pull --appId <appId> --envName <environment>
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Update your local apps Apps.js
+Perform application updates iteratively.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Push code changes to remote GIT repo.
+```sh
+git push
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Connect to your remote GIT repo from Amplify.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

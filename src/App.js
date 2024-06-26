@@ -1,7 +1,8 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import { useState } from "react";
 import './App.css';
-import {  MyIcon, Pets  } from './ui-components';
+// import {  MyIcon  } from './ui-components';
+import {  Pets  } from './ui-components';
 import {  NavBar } from './ui-components';
 import {  Footer } from './ui-components';
 import {  AddPet } from './ui-components';
@@ -12,10 +13,7 @@ function App({ user, signOut }) {
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [pet, setPet] = useState();
-
   const [updatePet, setUpdatePet] = useState();
-  // const [updatePet, setUpdatePet] = useState(false);
-
   const [Name, setName] = useState("");
   const [age, setAge] = useState("");
   const [breed, setBreed] = useState("");
@@ -24,6 +22,20 @@ function App({ user, signOut }) {
   const [image, setImage] = useState("");
 
   const addPetFormOverride = {
+    MyIcon: {
+      style: {
+        cursor: "pointer",
+      },
+      onClick: () => {
+        setShowForm(false);
+      },
+    },
+    image: {
+      src:
+        updatePet == null
+          ? "https://img.icons8.com/color/50/000000/dog"
+          : updatePet.image,
+    },
     TextField29766922: { // AddPet Name TextField
       placeholder: Name,
     },
@@ -42,46 +54,21 @@ function App({ user, signOut }) {
     TextField38594688: { // AddPet Image TextField
       placeholder: image,
     },
-    image: {
-      src:
-        updatePet == null
-          ? "https://img.icons8.com/color/50/000000/dog"
-          : updatePet.image,
+    Button29766926: { // AddPet Save button
+      isDisabled: updatePet ? true : false,
     },
     Button38594696: { // AddPet Update button
       isDisabled: !updatePet ? true : false,
     },
-    Button29766926: { // AddPet Save button
-      isDisabled: updatePet ? true : false,
-    },
-
-    MyIcon: {
-      style: {
-        cursor: "pointer",
-      },
-      onClick: () => {
-        setShowForm(false);
-      },
-    },
   };
 
   const navbarOverrides = {
-    Button: {
-      onClick: signOut,
-    },
-    image: {
-      src: user?.attributes?.profile,
-      //src: "https://img.icons8.com/color/50/000000/cat",
-    },
-    "Add Pet": {
+    "Add Pet": { // "Add Pet" is part of NavBar hierarchy
       style: {
         cursor: "pointer",
       },
       onClick: () => {
         // saveFile();
-        console.log("Add Pet button clicked. showForm state is: " + showForm);
-        console.log(pet);
-        console.log(updatePet);
         setName("");
         setColor("");
         setAge("");
@@ -92,12 +79,22 @@ function App({ user, signOut }) {
         setShowForm(!showForm);
       },
     },
-    AddPet: {
-      Button38594696: {
-        isDisabled: !updatePet ? true : false,
+    Button: {
+      onClick: signOut,
+    },
+    image: {
+      src: user?.attributes?.profile,
+      //src: "https://img.icons8.com/color/50/000000/cat",
+    },
+  };
+
+  const petDetailsOverrides = {
+    Close: {
+      onClick: () => {
+        setShowDetails(false);
       },
-      Button29766926: {
-        isDisabled: updatePet ? true : false,
+      style: {
+        cursor: "pointer",
       },
     },
   };
@@ -114,16 +111,7 @@ function App({ user, signOut }) {
               textAlign: "left",
               margin: "2rem",
             }}
-            overrides={{
-              Close: {
-                onClick: () => {
-                  setShowDetails(false);
-                },
-                style: {
-                  cursor: "pointer",
-                },
-              },
-            }}
+            overrides={petDetailsOverrides}
           />
         )}
 
@@ -142,7 +130,6 @@ function App({ user, signOut }) {
           overrideItems={({ item, index }) => ({
             overrides: {
               // Breed: { color: "blue" },
-
               Button38564537: { // PetProfile Profile button
                 onClick: () => {
                   setShowDetails(!showDetails);
@@ -152,7 +139,6 @@ function App({ user, signOut }) {
               Button38563868: { // PetProfile Update button.
                 onClick: () => {
                   if (!showForm) setShowForm(true);
-                  console.log("Update button clicked", item);
                   setUpdatePet(item);
                   // setUpdatePet(true);
                   setName(item.Name);

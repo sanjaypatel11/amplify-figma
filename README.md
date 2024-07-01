@@ -80,3 +80,4 @@ git push
 
 ### Connect to your remote GIT repo from Amplify.
 
+### Publish you Amplify app to the web.
